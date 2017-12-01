@@ -7,3 +7,4 @@ authors = ["Aleksander Vognild Burkow <aleksanderburkow@gmail.com>"]
 rocket = "0.3.3"
 rocket_codegen = "0.3.3"
 git2 = "0.6.8"
+tempdir = "0.3"

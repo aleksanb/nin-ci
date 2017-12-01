@@ -5,6 +5,7 @@ use std::io::prelude::*;
 use std::path::*;
 use git2::
 
+extern crate tempdir;
 extern crate git2;
 extern crate rocket;
 use rocket::response::NamedFile;
@@ -23,7 +24,10 @@ fn get_prod(path: PathBuf) -> Option<NamedFile> {
 
 fn main() {
     println!("Hello, world!");
-    Repository::clone(nin_project_repo, )
+    if let Ok(dir) = TempDir::new("build") {
+        println!("{:?}", dir);
+    }
+    //Repository::clone(nin_project_repo, )
     rocket::ignite()
         .mount("/", routes![index, get_prod])
         .launch();
