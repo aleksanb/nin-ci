@@ -1,16 +1,16 @@
 #![feature(plugin)]
 #![plugin(rocket_codegen)]
-
-use std::io::prelude::*;
-use std::path::*;
-use git2::
-
 extern crate tempdir;
 extern crate git2;
 extern crate rocket;
-use rocket::response::NamedFile;
 
-const nin_project_repo = "https://github.com/ninjadev/zeven.git";
+use std::io::prelude::*;
+use std::path::*;
+use rocket::response::NamedFile;
+use tempdir::TempDir;
+
+const nin_project_repo: &str = "https://github.com/ninjadev/zeven.git";
+const nin_repo: &str = "https://github.com/ninjadev/nin.git";
 
 #[get("/")]
 fn index() -> &'static str {
@@ -25,10 +25,14 @@ fn get_prod(path: PathBuf) -> Option<NamedFile> {
 fn main() {
     println!("Hello, world!");
     if let Ok(dir) = TempDir::new("build") {
-        println!("{:?}", dir);
+        git2::Repository::clone(nin_project_repo, dir)
+        .and_then(|repo| {
+            println!("{:?}, {:?}", 10, repo.state());
+        })
+
     }
     //Repository::clone(nin_project_repo, )
-    rocket::ignite()
-        .mount("/", routes![index, get_prod])
-        .launch();
+    //rocket::ignite()
+        //.mount("/", routes![index, get_prod])
+        //.launch();
 }
