@@ -1,0 +1,9 @@
+[package]
+name = "nin-ci"
+version = "0.1.0"
+authors = ["Aleksander Vognild Burkow <aleksanderburkow@gmail.com>"]
+
+[dependencies]
+rocket = "0.3.3"
+rocket_codegen = "0.3.3"
+git2 = "0.6.8"
